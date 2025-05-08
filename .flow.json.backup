@@ -1,0 +1,575 @@
+[
+    {
+        "id": "welcome",
+        "type": "tab",
+        "label": "env",
+        "disabled": false,
+        "info": "Init vars"
+    },
+    {
+        "id": "f84383c572289f51",
+        "type": "tab",
+        "label": "crawler",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8ece390b668ee201",
+        "type": "websocket-client",
+        "path": "ws://localhost:7125/websocket",
+        "tls": "",
+        "wholemsg": "false",
+        "hb": "0",
+        "subprotocol": "",
+        "headers": []
+    },
+    {
+        "id": "e5ee0ad148603a3c",
+        "type": "inject",
+        "z": "welcome",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "db95ef7d4f93600b",
+                "41e5dd6bc74d3693"
+            ]
+        ]
+    },
+    {
+        "id": "fce5f8728c5c5a12",
+        "type": "function",
+        "z": "welcome",
+        "name": "init serviceStatus",
+        "func": "var serviceStatus = {\n    \"klipper\" : \"\",\n    \"moonraker\" : \"\"\n};\n\nglobal.set(\"serviceStatus\",serviceStatus);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "ae1bc38a7819e104"
+            ]
+        ]
+    },
+    {
+        "id": "ae1bc38a7819e104",
+        "type": "function",
+        "z": "welcome",
+        "name": "ready = true",
+        "func": "var ready = true;\nglobal.set(\"ready\",ready);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "db95ef7d4f93600b",
+        "type": "function",
+        "z": "welcome",
+        "name": "init ready = false",
+        "func": "var ready = false;\nglobal.set(\"ready\",ready);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "fce5f8728c5c5a12"
+            ]
+        ]
+    },
+    {
+        "id": "41e5dd6bc74d3693",
+        "type": "template",
+        "z": "welcome",
+        "name": "config",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "[\n    {\n        \"id\" : 1,\n        \"method\" : \"server.info\"\n    },\n    {\n        \"id\": 2,\n        \"method\": \"printer.status\"\n    }\n]",
+        "output": "json",
+        "x": 290,
+        "y": 120,
+        "wires": [
+            [
+                "f713098a966f6035"
+            ]
+        ]
+    },
+    {
+        "id": "f713098a966f6035",
+        "type": "change",
+        "z": "welcome",
+        "name": "set global config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d2575e5809ec6d37",
+        "type": "exec",
+        "z": "f84383c572289f51",
+        "command": "systemctl is-active klipper",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "klipper service status",
+        "x": 600,
+        "y": 100,
+        "wires": [
+            [
+                "874b2441ab977448"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "78962d308e97d0a6",
+        "type": "inject",
+        "z": "f84383c572289f51",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "a0b69097e7a14971"
+            ]
+        ]
+    },
+    {
+        "id": "886e94f9f1231c9c",
+        "type": "debug",
+        "z": "f84383c572289f51",
+        "name": "service stauts",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a0b69097e7a14971",
+        "type": "function",
+        "z": "f84383c572289f51",
+        "name": "ready condition check",
+        "func": "var ready = global.get(\"ready\");\nif(ready)\n    return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "d2575e5809ec6d37",
+                "c784e3a932e30262"
+            ]
+        ]
+    },
+    {
+        "id": "874b2441ab977448",
+        "type": "rbe",
+        "z": "f84383c572289f51",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 830,
+        "y": 80,
+        "wires": [
+            [
+                "de801efc270a3b50"
+            ]
+        ]
+    },
+    {
+        "id": "de801efc270a3b50",
+        "type": "function",
+        "z": "f84383c572289f51",
+        "name": "set klipper service status",
+        "func": "msg.payload = msg.payload.trim();\nvar serviceStatus = global.get(\"serviceStatus\");\nserviceStatus.klipper = msg.payload;\nglobal.set(\"serviceStatus\",serviceStatus);\nmsg.topic = \"klipper status\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 80,
+        "wires": [
+            [
+                "886e94f9f1231c9c"
+            ]
+        ]
+    },
+    {
+        "id": "c784e3a932e30262",
+        "type": "exec",
+        "z": "f84383c572289f51",
+        "command": "systemctl is-active moonraker",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "moonraker service status",
+        "x": 610,
+        "y": 160,
+        "wires": [
+            [
+                "7b9cf7f8497c30bc"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7b9cf7f8497c30bc",
+        "type": "rbe",
+        "z": "f84383c572289f51",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 830,
+        "y": 140,
+        "wires": [
+            [
+                "2a55c88621679680"
+            ]
+        ]
+    },
+    {
+        "id": "2a55c88621679680",
+        "type": "function",
+        "z": "f84383c572289f51",
+        "name": "set moonraker service status",
+        "func": "msg.payload = msg.payload.trim();\nvar serviceStatus = global.get(\"serviceStatus\");\nserviceStatus.moonraker = msg.payload;\nglobal.set(\"serviceStatus\",serviceStatus);\nmsg.topic = \"moonraker status\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 140,
+        "wires": [
+            [
+                "886e94f9f1231c9c"
+            ]
+        ]
+    },
+    {
+        "id": "31e8048b7115e231",
+        "type": "websocket out",
+        "z": "f84383c572289f51",
+        "name": "moonraker rpc",
+        "server": "",
+        "client": "8ece390b668ee201",
+        "x": 460,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9564c04740b77833",
+        "type": "debug",
+        "z": "f84383c572289f51",
+        "name": "notify_proc_stat_update",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f4224129884cf872",
+        "type": "function",
+        "z": "f84383c572289f51",
+        "name": "parse json",
+        "func": "try {\n    msg.payload = JSON.parse(msg.payload);\n    return msg;\n} catch (err) {\n    node.error(\"Invalid JSON: \" + err.message, msg);\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [
+                "e14ca72d1c6e2412"
+            ]
+        ]
+    },
+    {
+        "id": "e14ca72d1c6e2412",
+        "type": "switch",
+        "z": "f84383c572289f51",
+        "name": "",
+        "property": "payload.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 520,
+        "wires": [
+            [
+                "9564c04740b77833"
+            ],
+            [
+                "110792742b63908c"
+            ]
+        ]
+    },
+    {
+        "id": "110792742b63908c",
+        "type": "debug",
+        "z": "f84383c572289f51",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f626a62f09ef805d",
+        "type": "inject",
+        "z": "f84383c572289f51",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"jsonrpc\":\"2.0\",\"method\":\"server.info\",\"id\":10}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "31e8048b7115e231"
+            ]
+        ]
+    },
+    {
+        "id": "8dfc15cdd48ddee9",
+        "type": "inject",
+        "z": "f84383c572289f51",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"jsonrpc\": \"2.0\",   \"method\": \"printer.info\",   \"id\": 10 }",
+        "payloadType": "json",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "31e8048b7115e231"
+            ]
+        ]
+    },
+    {
+        "id": "102f52f344148e4f",
+        "type": "websocket in",
+        "z": "f84383c572289f51",
+        "name": "moonraker rpc",
+        "server": "",
+        "client": "8ece390b668ee201",
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "f4224129884cf872"
+            ]
+        ]
+    },
+    {
+        "id": "02b7e64531ff55b2",
+        "type": "inject",
+        "z": "f84383c572289f51",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{             \"jsonrpc\": \"2.0\",             \"method\": \"printer.objects.list\",             \"id\": 999         }",
+        "payloadType": "json",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "31e8048b7115e231"
+            ]
+        ]
+    },
+    {
+        "id": "f58a74445be5d0ef",
+        "type": "inject",
+        "z": "f84383c572289f51",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"jsonrpc\":\"2.0\",\"method\":\"printer.objects.subscribe\",\"params\":{\"objects\":{\"gcode_move\":null,\"toolhead\":[\"position\",\"status\"]}},\"id\":998}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 360,
+        "wires": [
+            [
+                "31e8048b7115e231"
+            ]
+        ]
+    }
+]

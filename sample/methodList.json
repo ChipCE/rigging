@@ -1,0 +1,962 @@
+[
+    {
+        "base_id" : 0,
+        "name" : "server.info",
+        "type" : "Server Administration",
+        "description" : "Query Server Info",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.info",
+            "id": 0
+        }
+    },
+    {
+        "base_id" : 1,
+        "name" : "server.config",
+        "type" : "Server Administration",
+        "description" : "Get Server Configuration",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.config",
+            "id": 5616
+        }
+    },
+    {
+        "base_id" : 2,
+        "name" : "server.temperature_store",
+        "type" : "Server Administration",
+        "description" : "Request Cached Temperature Data",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.temperature_store",
+            "params": {
+                "include_monitors": false
+            },
+            "id": 2313
+        }
+    },
+    {
+        "base_id" : 3,
+        "name" : "server.gcode_store",
+        "type" : "Server Administration",
+        "description" : "Request Cached GCode Responses",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.gcode_store",
+            "params": {
+                "count": 100
+            },
+            "id": 7643
+        }
+    },
+    {
+        "base_id" : 4,
+        "name" : "server.logs.rollover",
+        "type" : "Server Administration",
+        "description" : "Rollover Logs",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.logs.rollover",
+            "params": {
+                "application": "moonraker"
+            },
+            "id": 4656
+        }
+    },
+    {
+        "base_id" : 5,
+        "name" : "server.restart",
+        "type" : "Server Administration",
+        "description" : "Restart Server",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.restart",
+            "id": 4656
+        }
+    },
+    {
+        "base_id" : 6,
+        "name" : "server.connection.identify",
+        "type" : "Server Administration",
+        "description" : "Identify Connection",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.connection.identify",
+            "params": {
+                "client_name": "moontest",
+                "version": "0.0.1",
+                "type": "web",
+                "url": "http://github.com/arksine/moontest",
+                "access_token": "<base64 encoded token>",
+                "api_key": "<system API key>"
+            },
+            "id": 4656
+        }
+    },
+    {
+        "base_id" : 7,
+        "name" : "server.websocket.id",
+        "type" : "Server Administration",
+        "description" : "Get Websocket ID",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "server.websocket.id",
+            "id": 4656
+        }
+    },
+    {
+        "base_id" : 8,
+        "name" : "printer.info",
+        "type" : "Printer Administration",
+        "description" : "Get Klippy host information",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.info",
+            "id": 5445
+        }
+    },
+    {
+        "base_id" : 9,
+        "name" : "printer.emergency_stop",
+        "type" : "Printer Administration",
+        "description" : "Emergency Stop",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.emergency_stop",
+            "id": 4564
+        }
+    },  
+    {
+        "base_id" : 10,
+        "name" : "printer.restart",
+        "type" : "Printer Administration",
+        "description" : "Host Restart.Requests a Klipper soft restart. This will reload the Klippy application and configuration. Connected MCUs will not be reset.",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.restart",
+            "id": 4894
+        }
+    },
+    {
+        "base_id" : 11,
+        "name" : "printer.firmware_restart",
+        "type" : "Printer Administration",
+        "description" : "Firmware Restart. Requests a Klipper firmware restart. This will reset all connected MCUs and reload the configuration. The host will not be restarted.",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.firmware_restart",
+            "id": 8463
+        }
+    },
+    {
+        "base_id" : 12,
+        "name" : "printer.objects.list",
+        "type" : "Printer Administration",
+        "description" : "Printer Status Requests.Returns a list of Klipper printer objects that are currently loaded. This can be used to determine if a specific object is available for query and/or subscription.",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.objects.list",
+            "id": 1454
+        }
+    },
+    {
+        "base_id" : 13,
+        "name" : "printer.objects.query",
+        "type" : "Printer Administration",
+        "description" : "Query printer object status. Requests the status of a provided set of printer objects.",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.objects.query",
+            "params": {
+                "objects": {
+                    "gcode_move": null,
+                    "toolhead": ["position", "status"]
+                }
+            },
+            "id": 4654
+        }
+    },
+    {
+        "base_id" : 14,
+        "name" : "printer.objects.subscribe",
+        "type" : "Printer Administration",
+        "description" : "Subscribe to printer object status updates",
+        "body" : {
+            "jsonrpc": "2.0",
+            "method": "printer.objects.subscribe",
+            "params": {
+                "objects": {
+                    "gcode_move": null,
+                    "toolhead": ["position", "status"]
+                }
+            },
+            "id": 5434
+        }
+    },
+    {
+        "base_id" : 15,
+        "name" : "",
+        "type" : "Printer Administration",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 16,
+        "name" : "",
+        "type" : "Printer Administration",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 17,
+        "name" : "",
+        "type" : "Printer Administration",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 18,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 19,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 20,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 21,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 22,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 23,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 24,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 25,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 26,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 27,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 28,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 29,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 30,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 31,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 32,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 33,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 34,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 35,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 36,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 37,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 38,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 39,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 40,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 41,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 42,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 43,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 44,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 45,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 46,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 47,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 48,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 49,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    }
+    ,
+    {
+        "base_id" : 50,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 51,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    }, 
+    {
+        "base_id" : 52,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 53,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 54,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 55,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 56,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 57,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 58,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 59,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 60,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 61,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 62,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 63,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 64,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 65,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 66,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 67,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 68,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 69,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 70,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 71,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 72,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 73,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 74,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 75,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 76,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 77,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 78,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 79,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 80,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 81,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 82,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 83,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 84,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 85,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 86,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 87,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 88,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 89,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 90,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 91,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 92,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 93,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 94,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 95,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 96,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 97,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 98,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    },
+    {
+        "base_id" : 99,
+        "name" : "",
+        "type" : "",
+        "description" : "",
+        "body" : {
+
+        }
+    }
+]

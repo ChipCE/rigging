@@ -1,0 +1,12 @@
+{
+    "name": "rigging",
+    "description": "A simple Klipper wrapper and REST backend to provide custom non-standard Klipper functions and a frontends. ",
+    "version": "1.0.0",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flow.json",
+            "credentialsFile": "flow_cred.json"
+        }
+    }
+}
